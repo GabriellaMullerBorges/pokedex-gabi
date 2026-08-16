@@ -3,6 +3,7 @@ import { Nav } from '../components/Nav/Nav';
 import { Footer } from '../components/Footer/Footer';
 import { StyledGrid } from '../components/Cards/PokemonGrid';
 import PokemonCard from '../components/Cards/PokemonCard';
+import { Searchform } from '../components/Search/searchForm';
 
 const pokeBaseURL = import.meta.env.VITE_API_BASE_URL;
 
@@ -34,6 +35,9 @@ const Home = () => {
       <Nav />
       <StyledGrid>
         <div className="container"> 
+            <div className="poke-search">
+                <Searchform/>
+            </div>
           <h2 className="div-title"> Pokémon Principais: </h2>
           <div className="pokes-container">
             {Pokes.length === 0 && <p style={{ color: 'white', textCenter: 'center' }}>Carregando...</p>}

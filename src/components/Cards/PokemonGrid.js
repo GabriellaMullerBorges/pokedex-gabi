@@ -15,7 +15,7 @@ export const StyledGrid = styled.div`
   .pokes-container {
     display: flex;
     flex-wrap: wrap; 
-    justify-content: space-between;
+    justify-content: center;
     align-items: stretch;
     padding: 2rem;
     max-width: 1400px;
