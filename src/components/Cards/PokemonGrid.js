@@ -21,6 +21,7 @@ export const StyledGrid = styled.div`
     max-width: 1400px;
     margin: 0 auto;
     gap: .8rem;
+    
   }
 
   .pokes-container div.poke-card {
