@@ -106,13 +106,6 @@ http://localhost:5174
 
 ---
 
-## ⚠️ Observações conhecidas
-
-- A rota `/elements/:tipo` depende do arquivo `ElementPokemons.jsx`, que em alguns momentos do desenvolvimento retornou erro 503 no servidor Vite — vale conferir se o build está estável antes de publicar.
-- O componente `PokemonCard` é reaproveitado em Home, Search e Details. O visual correto do card depende da classe `pokes-container` estar presente em algum elemento ancestral (regra de CSS definida em `PokemonGrid.js`/`StyledGrid`), então qualquer novo lugar que reutilizar o `PokemonCard` deve garantir esse wrapper.
-
----
-
 ## 👤 Autoria
 
 Projeto desenvolvido por **Gabriella Muller Borges**.
