@@ -19,7 +19,7 @@ export const StyledGrid = styled.div`
     align-items: stretch;
     padding: 2rem;
     max-width: 1400px;
-    margin: 0 auto;
+    margin: auto;
     gap: .8rem;
     
   }

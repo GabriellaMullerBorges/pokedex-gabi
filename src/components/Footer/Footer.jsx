@@ -5,7 +5,7 @@ export function Footer() {
   return (
     <FooterStyle>
         <footer id='footer'> 
-            <p>CODEEE </p>
+            <p>Coded by Gabriella Muller Borges </p>
         </footer>
     </FooterStyle>
   )
