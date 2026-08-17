@@ -1,16 +1,118 @@
-# React + Vite
+# Pokédex Gabriella
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Uma Pokédex construída com **React + Vite**, consumindo a [PokéAPI](https://pokeapi.co/) para exibir listagem, busca, detalhes e filtragem de Pokémon por tipo elemental.
 
-Currently, two official plugins are available:
+> Coded by Gabriella Muller Borges
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+---
 
-## React Compiler
+## ✨ Funcionalidades
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **Home (`/`)** — lista os Pokémon principais em um grid de cards (imagem, nome e número da Pokédex), com carregamento assíncrono ("Carregando...") enquanto os dados da API chegam.
+- **Busca (`/search?query=:nome`)** — barra de busca no topo que retorna o(s) resultado(s) correspondentes ao termo digitado, reaproveitando o card padrão da Home.
+- **Detalhes do Pokémon (`/pokemon/:nome`)** — página individual com imagem em destaque, altura, peso, tipos (badges) e estatísticas base (HP, Ataque, Defesa, Especial Ataque, Especial Defesa, Velocidade).
+- **Elementos (`/elements`)** — grade com todos os tipos de Pokémon (Fire, Water, Grass, Electric, Psychic, Dragon, Fairy, Stellar, etc.).
+- **Pokémon por tipo (`/elements/:tipo`)** — ao clicar em um tipo, lista todos os Pokémon daquele elemento (ex: `/elements/fire` retorna Charmander, Charmeleon, Charizard, Vulpix...).
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 🧱 Stack Técnica
+
+- **React** (via `react-jsx-dev-runtime`)
+- **Vite** como bundler/dev server (com HMR/`@react-refresh`)
+- **React Router DOM** para as rotas (`/`, `/search`, `/pokemon/:name`, `/elements`, `/elements/:type`)
+- **styled-components** para toda a estilização (CSS-in-JS)
+- **react-icons** (`md`, `cg`, `io5`) para ícones de navegação e UI
+- **PokéAPI** (`https://pokeapi.co/api/v2`) como fonte de dados
+- Sprites oficiais servidos via `raw.githubusercontent.com/PokeAPI/sprites`
+
+---
+
+## 📂 Estrutura de Pastas (conforme mapeado)
+
+```
+src/
+├── main.jsx
+├── App.jsx
+├── index.css
+├── pages/
+│   ├── Home.jsx
+│   ├── Search.jsx
+│   ├── PokemonDetails.jsx
+│   ├── Elements.jsx
+│   └── ElementPokemons.jsx
+└── components/
+    ├── Nav/
+    │   ├── Nav.jsx
+    │   └── navStyle.js
+    ├── Footer/
+    │   ├── Footer.jsx
+    │   └── FooterStyle.js
+    ├── Cards/
+    │   ├── PokemonCard.jsx
+    │   ├── PokemonGrid.js
+    │   └── detailsStyle.js
+    └── Search/
+        ├── searchForm.jsx
+        └── FormStyle.js
+```
+
+---
+
+## 🔌 Integração com a API
+
+O projeto consome a PokéAPI diretamente no client (via `fetch`), usando uma variável de ambiente para a base da URL:
+
+```
+VITE_API_BASE_URL=https://pokeapi.co/api/v2/
+```
+
+Principais endpoints utilizados:
+- `GET /pokemon/{name}` — detalhes de um Pokémon específico
+- `GET /pokemon?limit=10000&offset=0` — listagem completa (usada para popular busca/filtragem)
+- `GET /pokemon/{id}` — dados usados no grid da Home
+
+Imagens: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/{id}.png`
+
+---
+
+## 🚀 Rodando o projeto localmente
+
+```bash
+# instalar dependências
+npm install
+
+# subir o servidor de desenvolvimento (Vite)
+npm run dev
+```
+
+A aplicação sobe por padrão em:
+
+```
+http://localhost:5174
+```
+
+---
+
+## 🗺️ Rotas
+
+| Rota | Descrição |
+|---|---|
+| `/` | Home — grid com os Pokémon principais |
+| `/search?query=:nome` | Resultado da busca por nome |
+| `/pokemon/:nome` | Página de detalhes de um Pokémon |
+| `/elements` | Lista de todos os tipos elementais |
+| `/elements/:tipo` | Pokémon filtrados por tipo |
+
+---
+
+## ⚠️ Observações conhecidas
+
+- A rota `/elements/:tipo` depende do arquivo `ElementPokemons.jsx`, que em alguns momentos do desenvolvimento retornou erro 503 no servidor Vite — vale conferir se o build está estável antes de publicar.
+- O componente `PokemonCard` é reaproveitado em Home, Search e Details. O visual correto do card depende da classe `pokes-container` estar presente em algum elemento ancestral (regra de CSS definida em `PokemonGrid.js`/`StyledGrid`), então qualquer novo lugar que reutilizar o `PokemonCard` deve garantir esse wrapper.
+
+---
+
+## 👤 Autoria
+
+Projeto desenvolvido por **Gabriella Muller Borges**.
